@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "emMDi"
+rootProject.name = "emMeDi"
 include(":app")

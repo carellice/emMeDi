@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/icon.png" width="128" alt="Icona di emMDi">
+  <img src="docs/icon.png" width="128" alt="Icona di emMeDi">
 </p>
 
-<h1 align="center">emMDi</h1>
+<h1 align="center">emMeDi</h1>
 
 <p align="center">
   Un lettore di file Markdown per Android, semplice e curato.<br>
@@ -31,13 +31,13 @@
 - **Modifica dal codice**: tocca *Modifica* nella vista Codice e scrivi direttamente nel sorgente.
 - **Modifica dall'anteprima**: in modalità *Modifica* tocca un blocco (titolo, paragrafo, lista, tabella…) per modificarlo sul posto, eliminarlo, oppure aggiungi nuovi blocchi (to-do, testo, titolo, elenco, citazione, codice).
 - **Salvataggio automatico** sul file originale, con indicatore di stato.
-- **File recenti**, apertura da qualsiasi file manager (*Apri con → emMDi*) e creazione di nuovi file `.md`.
+- **File recenti**, apertura da qualsiasi file manager (*Apri con → emMeDi*) e creazione di nuovi file `.md`.
 - Supporto a titoli, grassetto, corsivo, barrato, link, codice in linea e a blocchi, citazioni, liste numerate, tabelle e linee di separazione.
 - Tema chiaro e scuro, icona tematizzata su Android 13+.
 
 ## Installazione
 
-Scarica `emMDi-x.y.z.apk` dalla [pagina delle release](../../releases/latest) e aprilo sul telefono (Android 8.0 o superiore). Potrebbe essere necessario consentire l'installazione da origini sconosciute.
+Scarica `emMeDi-x.y.z.apk` dalla [pagina delle release](../../releases/latest) e aprilo sul telefono (Android 8.0 o superiore). Potrebbe essere necessario consentire l'installazione da origini sconosciute.
 
 ## Compilare
 

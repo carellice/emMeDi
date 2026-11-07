@@ -170,7 +170,7 @@ private fun Hero(onOpen: () -> Unit, onNew: () -> Unit) {
                 )
                 Spacer(Modifier.width(16.dp))
                 Column {
-                    Text("emMDi", style = MaterialTheme.typography.displaySmall, color = Color.White)
+                    Text("emMeDi", style = MaterialTheme.typography.displaySmall, color = Color.White)
                     Text("Leggi, spunta e scrivi Markdown", style = MaterialTheme.typography.bodyMedium, color = Color.White.copy(alpha = 0.8f))
                 }
             }
