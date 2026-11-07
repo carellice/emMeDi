@@ -125,6 +125,7 @@ private fun HomeScreen(vm: MainVm) {
     val openLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { it?.let(vm::open) }
     val createLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/markdown")) { it?.let(vm::create) }
     val appear = remember { MutableTransitionState(false).apply { targetState = true } }
+    LaunchedEffect(Unit) { if (vm.update == UpdateState.Idle) vm.checkUpdate() }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -136,6 +137,7 @@ private fun HomeScreen(vm: MainVm) {
                 Hero(onOpen = { openLauncher.launch(arrayOf("*/*")) }, onNew = { createLauncher.launch("Nuovo documento.md") })
             }
         }
+        item { UpdateCard(vm.update, onDownload = vm::downloadUpdate, onInstall = { vm.installUpdate() }) }
         item {
             Text(
                 "Recenti", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -148,6 +150,7 @@ private fun HomeScreen(vm: MainVm) {
         items(vm.recents, key = { it.uri }) { r ->
             RecentRow(r, Modifier.animateItem(), onClick = { vm.open(android.net.Uri.parse(r.uri)) }, onRemove = { vm.forget(r.uri) })
         }
+        item { VersionFooter(vm.update) { vm.checkUpdate(manual = true) } }
     }
 }
 

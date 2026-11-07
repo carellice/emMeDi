@@ -67,6 +67,47 @@ class MainVm(app: Application) : AndroidViewModel(app) {
     private var crlf = false
     private var saveJob: Job? = null
 
+    // ---- aggiornamenti dall'app ----
+    var update by mutableStateOf<UpdateState>(UpdateState.Idle); private set
+
+    /** Al primo avvio in silenzio; dal pulsante dice anche se qualcosa va storto. */
+    fun checkUpdate(manual: Boolean = false) {
+        if (update is UpdateState.Checking || update is UpdateState.Downloading || update is UpdateState.Ready) return
+        update = UpdateState.Checking
+        viewModelScope.launch {
+            update = runCatching { Updater.check(getApplication()) }.fold(
+                onSuccess = { r -> r?.let { UpdateState.Available(it) } ?: UpdateState.UpToDate },
+                onFailure = {
+                    if (manual) message = "Impossibile controllare gli aggiornamenti"
+                    UpdateState.Idle
+                },
+            )
+        }
+    }
+
+    fun downloadUpdate() {
+        val release = (update as? UpdateState.Available)?.release ?: return
+        update = UpdateState.Downloading(release, 0f)
+        viewModelScope.launch {
+            update = runCatching {
+                Updater.download(getApplication(), release) { p -> update = UpdateState.Downloading(release, p) }
+            }.fold(
+                onSuccess = { UpdateState.Ready(release, it).also { r -> installUpdate(r) } },
+                onFailure = {
+                    message = "Download non riuscito"
+                    UpdateState.Available(release)
+                },
+            )
+        }
+    }
+
+    fun installUpdate(ready: UpdateState.Ready? = update as? UpdateState.Ready) {
+        ready ?: return
+        val app = getApplication<Application>()
+        // Android chiede una volta il permesso di installare app: poi si torna qui e si tocca Installa.
+        if (!Updater.canInstall(app)) Updater.openInstallPermission(app) else Updater.install(app, ready.file)
+    }
+
     fun open(u: Uri, startEditing: Boolean = false) {
         viewModelScope.launch {
             try {

@@ -34,6 +34,7 @@
 - **File recenti**, apertura da qualsiasi file manager (*Apri con → emMeDi*) e creazione di nuovi file `.md`.
 - Supporto a titoli, grassetto, corsivo, barrato, link, codice in linea e a blocchi, citazioni, liste numerate, tabelle e linee di separazione.
 - Tema chiaro e scuro, icona tematizzata su Android 13+.
+- **Aggiornamenti dall'app**: all'avvio emMeDi controlla l'ultima release su GitHub; se c'è una versione nuova compare una scheda in Home per scaricarla e installarla. In fondo alla Home c'è anche *Controlla aggiornamenti*.
 
 ## Installazione
 
